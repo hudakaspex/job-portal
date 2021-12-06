@@ -2,14 +2,14 @@ package com.job.portal.Jobportal.models.common;
 
 import lombok.Getter;
 import lombok.Setter;
+import lombok.ToString;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Entity
 @Getter
 @Setter
+@ToString
 public class City {
 
     @Id
@@ -18,7 +18,17 @@ public class City {
 
     private String name;
 
-    private Integer latitude;
+    private Float latitude;
 
-    private Integer longitude;
+    private Float longitude;
+
+    @OneToOne(targetEntity = Province.class)
+    private Province province;
+
+    /**
+     * indicate that a field is not to be persisted in the database.
+     * */
+    @Transient
+    private Integer province_id;
+
 }

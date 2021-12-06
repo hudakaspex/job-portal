@@ -2,16 +2,14 @@ package com.job.portal.Jobportal.models.common;
 
 import lombok.Getter;
 import lombok.Setter;
+import lombok.ToString;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
-import java.util.List;
+import javax.persistence.*;
 
 @Entity
 @Getter
 @Setter
+@ToString
 public class Province {
 
     @Id
@@ -20,10 +18,7 @@ public class Province {
 
     private String name;
 
-    private Integer latitude;
+    private Float latitude;
 
-    private Integer longitude;
-
-    @OneToMany()
-    private List<City> cities;
+    private Float longitude;
 }
