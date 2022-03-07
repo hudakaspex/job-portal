@@ -16,7 +16,6 @@ public class Address {
     private String street;
 
     @OneToOne
-    @JoinColumn(name = "province_id")
     private Province province;
 
     @OneToOne

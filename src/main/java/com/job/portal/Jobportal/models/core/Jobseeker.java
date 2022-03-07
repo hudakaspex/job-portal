@@ -10,9 +10,4 @@ import javax.persistence.Entity;
 @Setter
 @Getter
 public class Jobseeker extends Person {
-    private String firstName;
-
-    private String midName;
-
-    private String lastName;
 }

@@ -16,8 +16,4 @@ public class CityController {
     CityController(CityService cityService) {
     }
 
-    @GetMapping(value = "/cities")
-    public List<City> getCity() {
-        return Arrays.asList(new City());
-    }
 }

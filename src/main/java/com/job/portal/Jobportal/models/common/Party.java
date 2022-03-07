@@ -9,6 +9,7 @@ import java.util.Date;
 @Getter
 @Setter
 public abstract class Party {
+
     private String name;
 
     private Integer phone;

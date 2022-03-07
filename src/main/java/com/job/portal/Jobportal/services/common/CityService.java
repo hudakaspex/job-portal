@@ -13,6 +13,8 @@ import org.springframework.stereotype.Service;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Arrays;
+import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -67,5 +69,13 @@ public class CityService {
             err.printStackTrace();
         }
        }
+    }
+
+    public List<City> findAll() {
+        return this.cityRepository.findAll();
+    }
+
+    public Optional<City> findById(Integer id) {
+        return cityRepository.findById(id);
     }
 }
