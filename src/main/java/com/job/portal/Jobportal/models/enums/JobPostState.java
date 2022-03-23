@@ -1,2 +1,6 @@
-package com.job.portal.Jobportal.models.enums;public enum JobPostState {
+package com.job.portal.Jobportal.models.enums;
+
+public enum JobPostState {
+    ACTIVE,
+    EXPIRED
 }

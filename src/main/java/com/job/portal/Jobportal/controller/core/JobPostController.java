@@ -2,7 +2,6 @@ package com.job.portal.Jobportal.controller.core;
 
 import com.job.portal.Jobportal.models.core.JobPost;
 import com.job.portal.Jobportal.services.core.JobPostService;
-import lombok.Getter;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -11,7 +10,6 @@ import java.util.List;
 @RequestMapping("/api")
 public class JobPostController {
 
-    @Getter
     JobPostService jobPostService;
 
     JobPostController(JobPostService jobPostService) {
@@ -19,12 +17,12 @@ public class JobPostController {
     }
 
     @GetMapping("/jobposts")
-    public List<JobPost> getJobPosts() {
-        return this.jobPostService.getJobsPosts();
+    public List<JobPost> findALl() {
+        return this.jobPostService.findAll();
     }
 
     @PostMapping("/jobposts")
-    public JobPost createJobPost(@RequestBody JobPost jobPost) {
-        return this.jobPostService.createJobPost(jobPost);
+    public JobPost create(@RequestBody JobPost jobPost) {
+        return this.jobPostService.create(jobPost);
     }
 }
