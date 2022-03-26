@@ -10,7 +10,7 @@ import javax.persistence.Id;
 @Entity
 @Getter
 @Setter
-public class State {
+public class AppliedJobState {
     @Id
     private Integer id;
 

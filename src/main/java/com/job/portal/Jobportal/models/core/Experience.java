@@ -1,6 +1,7 @@
 package com.job.portal.Jobportal.models.core;
 
 import com.job.portal.Jobportal.models.common.Address;
+import com.job.portal.Jobportal.models.enums.EmploymentType;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -29,5 +30,5 @@ public class Experience {
     @OneToOne
     private Address address;
 
-    private String employmentType;
+    private EmploymentType employmentType;
 }

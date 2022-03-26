@@ -1,11 +1,11 @@
 package com.job.portal.Jobportal.models.core;
-
 import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.OneToOne;
+
 
 @Entity
 @Getter
@@ -20,5 +20,6 @@ public class AppliedJob {
     @OneToOne
     private Resume resume;
 
-    private String state;
+    @OneToOne
+    private AppliedJobState state;
 }
