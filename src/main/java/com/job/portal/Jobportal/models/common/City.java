@@ -13,7 +13,7 @@ import javax.persistence.*;
 public class City {
 
     @Id
-    @GeneratedValue()
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
 
     private String name;

@@ -10,7 +10,7 @@ import javax.persistence.*;
 @Setter
 public class Address {
     @Id
-    @GeneratedValue()
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
 
     private String street;

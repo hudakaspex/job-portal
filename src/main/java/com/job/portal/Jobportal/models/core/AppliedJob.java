@@ -2,9 +2,7 @@ package com.job.portal.Jobportal.models.core;
 import lombok.Getter;
 import lombok.Setter;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.OneToOne;
+import javax.persistence.*;
 
 
 @Entity
@@ -12,6 +10,7 @@ import javax.persistence.OneToOne;
 @Setter
 public class AppliedJob {
     @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
 
     @OneToOne

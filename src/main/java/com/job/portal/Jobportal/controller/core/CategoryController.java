@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController()
+@CrossOrigin(origins = "http://localhost:4200")
 @RequestMapping("/api/")
 public class CategoryController {
 
@@ -29,12 +30,20 @@ public class CategoryController {
 
     @PutMapping("/categories/{id}")
     public Category update(@PathVariable("id") Integer id, @RequestBody() Category category) {
-        var newCategory = this.categoryService.update(category);
+        var categoryInDB = this.categoryService.findById(id).get();
+        categoryInDB.setName(category.getName());
+        categoryInDB.setDescription(category.getDescription());
+        var newCategory = this.categoryService.update(categoryInDB);
         return newCategory;
     }
 
-    @DeleteMapping("/categories")
+    @DeleteMapping("/categories/{id}")
     public void delete(@PathVariable("id") Integer id) {
         this.categoryService.delete(id);
+    }
+
+    @PostMapping("/categories/deleteByIds")
+    public void deleteByIds(@RequestBody() List<Integer> ids) {
+        this.categoryService.deleteByIds(ids);
     }
 }

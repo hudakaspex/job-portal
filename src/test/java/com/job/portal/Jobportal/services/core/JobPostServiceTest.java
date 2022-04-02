@@ -54,7 +54,7 @@ class JobPostServiceTest {
     void testCreate() {
         //GIVEN
         var jobPost = new JobPost();
-        jobPost.setLabel("Front End Developer");
+        jobPost.setTitle("Front End Developer");
 
         //WHEN
         when(this.jobPostRepository.save(any(JobPost.class))).thenReturn(jobPost);
@@ -65,7 +65,7 @@ class JobPostServiceTest {
 
         verify(jobPostRepository).count();
 
-        assertThat(jobPost1.getLabel()).isSameAs(jobPost.getLabel());
+        assertThat(jobPost1.getTitle()).isSameAs(jobPost.getTitle());
     }
 
     @Test

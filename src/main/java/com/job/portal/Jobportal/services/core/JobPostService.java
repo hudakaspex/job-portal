@@ -37,4 +37,8 @@ public class JobPostService {
     public void delete(int id) {
        this.jobPostRepository.deleteById(id);
     }
+
+    public void deleteByIds(List<Integer> ids) {
+        this.jobPostRepository.deleteAllById(ids);
+    }
 }
