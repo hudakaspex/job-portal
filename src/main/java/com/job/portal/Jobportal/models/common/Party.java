@@ -3,17 +3,21 @@ package com.job.portal.Jobportal.models.common;
 import lombok.Getter;
 import lombok.Setter;
 
-import javax.persistence.JoinColumn;
-import javax.persistence.OneToOne;
+import javax.persistence.*;
 import java.util.Date;
 
 @Getter
 @Setter
+@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
+@Entity
 public abstract class Party {
+    @Id()
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Long id;
 
     private String name;
 
-    private Integer phone;
+    private String phone;
 
     private String email;
 

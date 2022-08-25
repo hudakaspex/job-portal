@@ -11,9 +11,6 @@ import javax.persistence.*;
 @Setter
 @ToString
 public class Person extends Party {
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Integer id;
 
     @Column
     private String firstName;
@@ -23,4 +20,22 @@ public class Person extends Party {
 
     @Column
     private String lastName;
+
+    public void setName(String name) {
+       String arr[] = name.split(" ");
+       switch (arr.length) {
+           case 1:
+               this.firstName = name;
+               break;
+           case 2:
+               this.firstName = arr[0];
+               this.midName = arr[1];
+               break;
+           default:
+               this.firstName = arr[0];
+               this.midName = arr[1];
+               this.lastName = arr[2];
+               break;
+       }
+    }
 }

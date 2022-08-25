@@ -2,6 +2,7 @@ package com.job.portal.Jobportal.controller.core;
 
 import com.job.portal.Jobportal.models.core.JobPost;
 import com.job.portal.Jobportal.services.core.JobPostService;
+import net.bytebuddy.implementation.bytecode.Throw;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -22,7 +23,8 @@ public class JobPostController {
 
     @GetMapping("/jobposts")
     public List<JobPost> findALl() {
-        return this.jobPostService.findAll();
+        var jobPosts =  this.jobPostService.findAll();
+        return jobPosts;
     }
 
     @PostMapping("/jobposts")
@@ -32,7 +34,13 @@ public class JobPostController {
 
     @GetMapping("/jobposts/{id}")
     public Optional<JobPost> findById(@PathVariable Integer id) {
-        return this.jobPostService.findById(id);
+        var jobPost = this.jobPostService.findById(id);
+        if (jobPost.isEmpty()) {
+            throw new NullPointerException("Job Post Not found");
+        }
+        else {
+            return jobPost;
+        }
     }
 
     @PutMapping("/jobposts/{id}")

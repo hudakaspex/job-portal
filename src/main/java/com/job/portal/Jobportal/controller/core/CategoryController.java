@@ -2,13 +2,15 @@ package com.job.portal.Jobportal.controller.core;
 
 import com.job.portal.Jobportal.models.core.Category;
 import com.job.portal.Jobportal.services.core.CategoryService;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController()
-@CrossOrigin(origins = "http://localhost:4200")
-@RequestMapping("/api/")
+@CrossOrigin(origins = "*")
+@RequestMapping("/api")
 public class CategoryController {
 
     private final CategoryService categoryService;
@@ -18,8 +20,9 @@ public class CategoryController {
     }
 
     @GetMapping("/categories")
-    public List<Category> findAll() {
-        return this.categoryService.findAll();
+    public ResponseEntity<List<Category>> findAll() {
+        var categories = this.categoryService.findAll();
+        return new ResponseEntity<>(categories, HttpStatus.OK);
     }
 
     @PostMapping("/categories")
@@ -43,7 +46,13 @@ public class CategoryController {
     }
 
     @PostMapping("/categories/deleteByIds")
-    public void deleteByIds(@RequestBody() List<Integer> ids) {
-        this.categoryService.deleteByIds(ids);
+    public ResponseEntity<String> deleteByIds(@RequestBody() List<Integer> ids) {
+        try {
+            this.categoryService.deleteByIds(ids);
+            return new ResponseEntity<>(HttpStatus.OK);
+        }
+        catch (Error err) {
+            return new ResponseEntity<>(err.getMessage(), HttpStatus.EXPECTATION_FAILED);
+        }
     }
 }
