@@ -20,7 +20,7 @@ public class UserPortal {
     @OneToOne(cascade = CascadeType.ALL)
     private UserCredentials credentials;
 
-    @OneToOne(cascade = CascadeType.PERSIST)
+    @OneToOne(cascade = CascadeType.PERSIST, targetEntity = Party.class)
     private Party info;
 
     public UserPortal() {

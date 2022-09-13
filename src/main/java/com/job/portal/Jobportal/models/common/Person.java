@@ -21,7 +21,8 @@ public class Person extends Party {
     @Column
     private String lastName;
 
-    public void setName(String name) {
+    public void setSplitName(String name) {
+        setName(name);
        String arr[] = name.split(" ");
        switch (arr.length) {
            case 1:

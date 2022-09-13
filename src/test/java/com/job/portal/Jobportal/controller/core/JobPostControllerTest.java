@@ -34,10 +34,6 @@ class JobPostControllerTest {
     private MockMvc mockMvc;
 
     @Test
-    void findALl() {
-    }
-
-    @Test
     void create() throws Exception {
 
         // ketika Service melakukan create dan mengembalikan nilai, kemudian kita akan mengetest API kita
@@ -50,10 +46,5 @@ class JobPostControllerTest {
                     .andExpect(status().isOk())
                     .andDo(print())
                     .andExpect(jsonPath("$.label").value(null));
-    }
-
-    @Test
-    void getJobPostService() {
-        
     }
 }

@@ -1,7 +1,7 @@
 package com.job.portal.Jobportal.Security.controllers;
 
-import com.job.portal.Jobportal.Security.models.UserCredentials;
 import com.job.portal.Jobportal.Security.models.UserPortal;
+import com.job.portal.Jobportal.Security.models.dto.LoginReqDto;
 import com.job.portal.Jobportal.Security.models.dto.LoginResDto;
 import com.job.portal.Jobportal.Security.models.dto.RegisterReqDto;
 import com.job.portal.Jobportal.Security.services.UserService;
@@ -13,6 +13,8 @@ import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
+
+import javax.validation.Valid;
 
 @RestController
 @RequestMapping("/api")
@@ -36,7 +38,7 @@ public class UserController {
     }
 
     @PostMapping("/login")
-    public ResponseEntity<LoginResDto> login(@RequestBody UserCredentials user) {
+    public ResponseEntity<LoginResDto> login(@Valid @RequestBody LoginReqDto user) {
         var userData = new UsernamePasswordAuthenticationToken(user.getUsername(), user.getPassword());
         try {
             this.authenticationManager.authenticate(userData);
@@ -50,8 +52,8 @@ public class UserController {
     }
 
     @PostMapping("/register")
-    public ResponseEntity<UserPortal> register(@RequestBody RegisterReqDto registerReqDto) {
-        //insert user to database
+    public ResponseEntity<UserPortal> register(@Valid @RequestBody RegisterReqDto registerReqDto) {
+        //encode password
         registerReqDto.setPassword(passwordEncoder.encode(registerReqDto.getPassword()));
         var createdUser = this.userService.create(registerReqDto);
         //response ok when success

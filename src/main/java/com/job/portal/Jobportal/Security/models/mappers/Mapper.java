@@ -10,6 +10,8 @@ import com.job.portal.Jobportal.models.common.Party;
 import com.job.portal.Jobportal.models.common.Person;
 import org.springframework.stereotype.Component;
 
+import java.util.Date;
+
 @Component()
 public class Mapper {
 
@@ -33,6 +35,7 @@ public class Mapper {
         userCredentials.setPassword(registerReqDto.getPassword());
         userCredentials.setUsername(registerReqDto.getUsername());
         userCredentials.setRole(role);
+        userCredentials.setCreatedDate(new Date());
 
         //USER
         UserPortal userPortal = new UserPortal();
@@ -47,7 +50,7 @@ public class Mapper {
         Person person = new Person();
         person.setEmail(reqDto.getEmail());
         person.setPhone(reqDto.getPhone());
-        person.setName(reqDto.getName());
+        person.setSplitName(reqDto.getName());
         return person;
     }
 

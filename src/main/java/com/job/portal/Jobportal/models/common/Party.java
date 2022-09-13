@@ -10,15 +10,17 @@ import java.util.Date;
 @Setter
 @Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
 @Entity
-public abstract class Party {
+public class Party {
     @Id()
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
     private String name;
 
+    @Column(unique = true)
     private String phone;
 
+    @Column(unique = true)
     private String email;
 
     @OneToOne

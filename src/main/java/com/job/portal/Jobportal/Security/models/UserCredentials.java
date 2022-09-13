@@ -1,6 +1,7 @@
 package com.job.portal.Jobportal.Security.models;
 
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -12,10 +13,8 @@ import java.util.Date;
 @Getter
 @Setter
 @Entity
+@NoArgsConstructor
 public class UserCredentials implements UserDetails {
-
-    public UserCredentials() {
-    }
 
     public UserCredentials(UserCredentials user) {
         setId(user.getId());
