@@ -2,10 +2,7 @@ package com.job.portal.Jobportal.Security.models;
 
 import com.job.portal.Jobportal.models.common.Party;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 import lombok.Setter;
-import org.hibernate.annotations.Cascade;
-
 import javax.persistence.*;
 
 @Getter

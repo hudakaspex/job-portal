@@ -6,6 +6,7 @@ import lombok.extern.log4j.Log4j2;
 import org.jetbrains.annotations.NotNull;
 import org.springframework.stereotype.Service;
 
+import javax.validation.Valid;
 import java.util.List;
 import java.util.Optional;
 
@@ -27,8 +28,7 @@ public class CategoryService {
         return this.categoryRepository.findById(id);
     }
 
-    public Category create(@NotNull Category category) {
-        category.setId(null);
+    public Category create(@Valid Category category) {
         var newCategory = this.categoryRepository.save(category);
         return newCategory;
     }

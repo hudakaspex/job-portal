@@ -1,8 +1,11 @@
 package com.job.portal.Jobportal.Security.services;
 
 import com.job.portal.Jobportal.Security.exceptions.UserAlreadyExistException;
+import com.job.portal.Jobportal.Security.models.Role;
 import com.job.portal.Jobportal.Security.models.UserCredentials;
 import com.job.portal.Jobportal.Security.models.UserPortal;
+import com.job.portal.Jobportal.Security.models.enums.UserRole;
+import com.job.portal.Jobportal.Security.repository.RoleRepository;
 import com.job.portal.Jobportal.Security.repository.UserRepository;
 import com.job.portal.Jobportal.models.core.Jobseeker;
 import com.job.portal.Jobportal.models.core.Recruiter;
@@ -27,17 +30,19 @@ public class UserService implements UserDetailsService {
     private final JobSeekerService jobSeekerService;
     private final RecruiterService recruiterService;
     private final Mapper mapper;
+    private final RoleRepository roleRepository;
 
     public UserService(
             UserCredentialsRepository userCredentialsRepository,
             UserRepository userRepository, JobSeekerService jobSeekerService,
             RecruiterService recruiterService,
-            Mapper mapper) {
+            Mapper mapper, RoleRepository roleRepository) {
         this.userCredentialsRepository = userCredentialsRepository;
         this.userRepository = userRepository;
         this.jobSeekerService = jobSeekerService;
         this.recruiterService = recruiterService;
         this.mapper = mapper;
+        this.roleRepository = roleRepository;
     }
 
     @Override
@@ -66,17 +71,24 @@ public class UserService implements UserDetailsService {
 
             switch (registerReqDto.getType()) {
                 case JOBSEEKER:
-                    user.getCredentials().getRole().setId(1L);
+                    Role jobseekerRole = getRoleByType(UserRole.JOBSEEKER);
+                    user.getCredentials().setRole(jobseekerRole);
                     Jobseeker jobseeker = new Jobseeker(user);
                     return this.jobSeekerService.create(jobseeker);
                 case RECRUITER:
                     // create user type RECRUITER
-                    user.getCredentials().getRole().setId(2L);
+                    Role recruiterRole = getRoleByType(UserRole.RECRUITER);
+                    user.getCredentials().setRole(recruiterRole);
                     Recruiter recruiter = new Recruiter(user);
                     return this.recruiterService.create(recruiter);
                 default:
-                    throw new IllegalArgumentException("Error");
+                    throw new IllegalArgumentException("Parameter Role not match");
             }
+    }
+
+    private Role getRoleByType(UserRole type) {
+        Optional<Role> role = roleRepository.findByName(type);
+        return role.get();
     }
 
     private boolean isEmailAlreadyExist(String email) {

@@ -20,7 +20,7 @@ import java.security.SecureRandom;
 @EnableWebSecurity()
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
-    private UserService userService;
+    private final UserService userService;
 
     private final TokenFilter tokenFilter;
 

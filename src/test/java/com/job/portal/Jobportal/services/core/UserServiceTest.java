@@ -1,11 +1,13 @@
 package com.job.portal.Jobportal.services.core;
 
 import com.job.portal.Jobportal.Security.exceptions.UserAlreadyExistException;
+import com.job.portal.Jobportal.Security.models.Role;
 import com.job.portal.Jobportal.Security.models.UserCredentials;
 import com.job.portal.Jobportal.Security.models.UserPortal;
 import com.job.portal.Jobportal.Security.models.dto.RegisterReqDto;
 import com.job.portal.Jobportal.Security.models.enums.UserRole;
 import com.job.portal.Jobportal.Security.models.mappers.Mapper;
+import com.job.portal.Jobportal.Security.repository.RoleRepository;
 import com.job.portal.Jobportal.Security.repository.UserCredentialsRepository;
 import com.job.portal.Jobportal.Security.repository.UserRepository;
 import com.job.portal.Jobportal.Security.services.UserService;
@@ -47,6 +49,9 @@ class UserServiceTest {
     UserRepository userRepository;
 
     @Mock
+    RoleRepository roleRepository;
+
+    @Mock
     Mapper mapper;
 
     @InjectMocks
@@ -59,6 +64,10 @@ class UserServiceTest {
         Mapper mapUser = new Mapper();
         UserPortal user = mapUser.toUser(registerDto);
         Jobseeker jobseeker = new Jobseeker(user);
+        Optional<Role> role = Optional.of(new Role());
+        role.get().setName(UserRole.JOBSEEKER);
+
+        Mockito.when(this.roleRepository.findByName(any(UserRole.class))).thenReturn(role);
 
         Mockito.when(this.mapper.toUser(any(RegisterReqDto.class))).thenReturn(user);
 
@@ -78,6 +87,10 @@ class UserServiceTest {
         Mapper mapUser = new Mapper();
         UserPortal user = mapUser.toUser(registerDto);
         Recruiter recruiter = new Recruiter(user);
+        Optional<Role> role = Optional.of(new Role());
+        role.get().setName(UserRole.RECRUITER);
+
+        Mockito.when(this.roleRepository.findByName(any(UserRole.class))).thenReturn(role);
 
         Mockito.when(this.mapper.toUser(any(RegisterReqDto.class))).thenReturn(user);
 

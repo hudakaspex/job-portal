@@ -12,7 +12,7 @@ import java.util.function.Function;
 @Component
 public class JwtUtil {
 
-    private final String SCRET_KEY = ")a0APpaw72$1";
+    private final String SECRET_KEY = ")a0APpaw72$1";
 
     public String extractUsername(String token) {
         return extraClaim(token, Claims::getSubject);
@@ -28,7 +28,7 @@ public class JwtUtil {
     }
 
     private Claims extractAllClaim(String token) {
-        return Jwts.parser().setSigningKey(SCRET_KEY).parseClaimsJws(token).getBody();
+        return Jwts.parser().setSigningKey(SECRET_KEY).parseClaimsJws(token).getBody();
     }
 
     private Boolean isTokenExpired(String token) {
@@ -43,7 +43,7 @@ public class JwtUtil {
                 .setSubject(username)
                 .setIssuedAt(new Date(System.currentTimeMillis()))
                 .setExpiration(new Date(System.currentTimeMillis() + twelveHour))
-                .signWith(SignatureAlgorithm.HS256, SCRET_KEY)
+                .signWith(SignatureAlgorithm.HS256, SECRET_KEY)
                 .compact();
     }
 

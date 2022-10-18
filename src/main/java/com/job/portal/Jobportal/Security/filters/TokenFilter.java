@@ -26,7 +26,6 @@ public class TokenFilter extends OncePerRequestFilter {
         this.userService = userService;
     }
 
-
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
         final String authorizationHeader = request.getHeader("Authorization");

@@ -4,6 +4,7 @@ import com.job.portal.Jobportal.Security.models.UserCredentials;
 import com.job.portal.Jobportal.Security.models.UserPortal;
 import com.job.portal.Jobportal.Security.models.Role;
 import com.job.portal.Jobportal.Security.models.dto.RegisterReqDto;
+import com.job.portal.Jobportal.Security.models.dto.RegisterResDto;
 import com.job.portal.Jobportal.Security.models.enums.UserRole;
 import com.job.portal.Jobportal.models.common.Organization;
 import com.job.portal.Jobportal.models.common.Party;
@@ -60,5 +61,13 @@ public class Mapper {
         organization.setPhone(reqDto.getPhone());
         organization.setName(reqDto.getName());
         return organization;
+    }
+
+    public RegisterResDto toRegisterResponseDto(UserPortal user) {
+        RegisterResDto registerResDto = new RegisterResDto();
+        registerResDto.setUsername(user.getCredentials().getUsername());
+        registerResDto.setName(user.getInfo().getName());
+        registerResDto.setEmail(user.getInfo().getEmail());
+        return registerResDto;
     }
 }

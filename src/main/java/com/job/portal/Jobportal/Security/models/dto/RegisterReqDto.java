@@ -1,7 +1,6 @@
 package com.job.portal.Jobportal.Security.models.dto;
 
 import com.job.portal.Jobportal.Security.models.enums.UserRole;
-import com.job.portal.Jobportal.Security.utlis.ValueOfEnum;
 import lombok.Getter;
 import lombok.Setter;
 import org.springframework.validation.annotation.Validated;
@@ -18,6 +17,7 @@ public class RegisterReqDto {
     private String username;
     @NotBlank
     private String password;
+    @NotBlank
     private String email;
     private String phone;
     private UserRole type;
